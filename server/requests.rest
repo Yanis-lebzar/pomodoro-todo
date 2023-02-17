@@ -1,0 +1,19 @@
+# POST http://localhost:8000/todo/new
+# Content-Type: application/json
+
+# {
+#     "title": "SUUUUUUUU",
+#     "description": "QUELLE BELLE JOURNÉE"
+# }
+
+
+# GET http://localhost:8000/todo/
+
+
+PUT http://localhost:8000/todo/63ea5dee13f2988b9e24fc7b
+Content-Type: application/json
+
+
+{
+    "title" : "stp akhy"
+}

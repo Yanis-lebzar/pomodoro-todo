@@ -1,11 +1,45 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+"use client";
 
-const inter = Inter({ subsets: ['latin'] })
-
+import Head from "next/head";
+import Image from "next/image";
+import { Inter } from "@next/font/google";
+import styles from "@/styles/Home.module.css";
+import TextMain from "./components/TextMain";
+import ButtonPomodoro from "./components/ButtonPomodoro";
+import iconsDatas from "../datas/icons";
+import { svgStaticDatas, svgDynamicDatas } from "../datas/svg";
+import { useEffect, useState } from "react";
+import PomodoroTimer from "./components/PomodoroTimer";
+import ButtonAddTask from "./components/ButtonAddTask";
+import TodoContainer from "./components/TodoCard";
+import TaskModal from "./components/TaskModalSettings";
+import Task from "./components/Task";
+import AddTask from "./components/AddTask";
+import { getTodos, createTodo } from "./api/todo-api";
+import TodoCard from "./components/TodoCard";
+import TodoProvider, { useTodoContext } from "@/context/TodoProvider";
+import TaskModalSettings from "./components/TaskModalSettings";
+import TaskModalAdd from "./components/TaskModalAdd";
+import Pomodoro from "./components/Pomodoro";
+const inter = Inter({ subsets: ["latin"] });
+// interface Todo {
+//   title: string;
+//   description?: string;
+//   taskId: string;
+// }
 export default function Home() {
+  const [iconIndex, setIconIndex] = useState(0);
+  // const [todos, setTodos] = useState<Todo[]>([]);
+
+  const { todos, setTodos, todoId } = useTodoContext();
+  const logTodo = (todo: any) => {
+    console.log("aaaaaaaaaaaaaaaaa", todo);
+  };
+
+  const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+
+  console.log("todo context", todoId);
   return (
     <>
       <Head>
@@ -14,110 +48,47 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>src/pages/index.tsx</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
+      <main className=" w-full h-screen bg-hero-background bg-cover bg-no-repeat bg-bottom ">
+        {/* Content */}
+        <div className="w-full h-full flex  pt-40 pb-10 px-16">
+          {/* Left column / Pomodoro part */}
+          <div className=" lg:h-full lg:w-1/2  pt-7 flex flex-col  justify-between">
+            <TextMain />
+            <Pomodoro />
+          </div>
+          {/* Right column / Todo part */}
+          <div className=" lg:h-full lg:w-1/2 bg-red-200 p-10 rounded-todoContainer bg-todoContainer">
+            <ButtonAddTask handleClick={() => setIsModalAddOpen(true)} />
+            {/* <AddTask /> */}
+            <div className="mt-20 grid grid-cols-3 w-full place-items-center gap-[10%] overflow-auto scroll-smooth scrollbar-hide ">
+              {todos.map((todo) => {
+                // logTodo(todo);
+                return (
+                  <>
+                    <TodoCard
+                      key={todo._id}
+                      taskTitle={todo.title}
+                      handleClick={() => setIsModalSettingsOpen(true)}
+                      todoId={todo._id ? todo._id : ""}
+                    />
+                  </>
+                );
+              })}
+              <TaskModalSettings
+                setModalClose={() => setIsModalSettingsOpen(false)}
+                handleClick={() => setIsModalSettingsOpen(false)}
+                isModalOpen={isModalSettingsOpen}
+                taskId={todoId}
               />
-            </a>
+              <TaskModalAdd
+                setModalClose={() => setIsModalAddOpen(false)}
+                handleClick={() => setIsModalAddOpen(!isModalAddOpen)}
+                isModalOpen={isModalAddOpen}
+              />
+            </div>
           </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
         </div>
       </main>
     </>
-  )
+  );
 }
