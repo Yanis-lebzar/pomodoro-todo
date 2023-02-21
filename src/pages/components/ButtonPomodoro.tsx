@@ -20,7 +20,7 @@ function ButtonPomodoro({ icon, handleClick }: Props) {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       className={` w-[51px] h-10 bg-white rounded-md justify-center  items-center  flex object-contain  cursor-pointer
-    ${icon.name == "pauseIcon.svg" ? "p-4" : "p-2.5"} `}
+    ${icon && icon.name == "pauseIcon.svg" ? "p-4" : "p-2.5"} `}
       onClick={handleClick}
     >
       <svg
