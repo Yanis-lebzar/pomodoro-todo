@@ -1,0 +1,48 @@
+// setWorkTime(newWorkTime);
+
+// if (
+//   isOnWorkPhase &&
+//   newWorkTime != workTime &&
+//   newBreakTime === breakTime
+// ) {
+//   console.log("work phase and new work time only ");
+//   setDefaultTime(newWorkTime);
+//   setWorkTime(newWorkTime);
+//   setTime(newWorkTime);
+//   setIsOnWorkPhase(true);
+// } else if (
+//   isOnWorkPhase &&
+//   newWorkTime === workTime &&
+//   newBreakTime != breakTime
+// ) {
+//   console.log("work phase and  got only a new break time ");
+//   setIsOnWorkPhase(false);
+//   setDefaultTime(newBreakTime);
+//   setBreakTime(newBreakTime);
+//   setTime(newBreakTime);
+// } else if (
+//   !isOnWorkPhase &&
+//   newWorkTime === workTime &&
+//   newBreakTime != breakTime
+// ) {
+//   console.log("break phase and  got only a new break time");
+
+//   setIsOnWorkPhase(false);
+//   setDefaultTime(newWorkTime);
+//   setBreakTime(newWorkTime);
+
+//   setTime(newBreakTime);
+// } else if (!isOnWorkPhase && newWorkTime != workTime) {
+//   console.log("break phase and work time changed");
+
+//   setIsOnWorkPhase(true);
+//   setDefaultTime(newWorkTime);
+//   setWorkTime(newWorkTime);
+//   setTime(newWorkTime);
+//   setBreakTime(newBreakTime);
+// }
+
+// notice a new working time
+// useEffect(() => {
+//   setIsOnWorkPhase(true);
+// }, [workTime]);

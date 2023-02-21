@@ -11,3 +11,13 @@ https://www.youtube.com/watch?v=lSzfYAQYKU0&t=70s
 https://github.com/wrongakram/micro-interactions-docket
 
 https://codesandbox.io/s/timeline-framer-motion-forked-c8uqqy?file=/src/App.tsx
+
+Faire un site ultra rewardant, l'utilisateur gagne de l'xp plus il passe du temps à travailler.
+
+On a un ranking des utilisateurs.
+
+Pour l'ui, on crée un modèle avec spline d'une chambre, et puis on anime un zoom qui arrive devant le bureau de la personne.
+
+Ici, la personne pourra cliquer pour activer son pomodoro et travailler.
+
+C'est immersif, des niveau avec un avatar (personnalisable?), un endroit communautaire, forum d'entraide, tips pour se focus ou pour le taff.

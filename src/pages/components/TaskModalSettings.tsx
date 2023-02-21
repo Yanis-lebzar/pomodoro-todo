@@ -24,7 +24,7 @@ function TaskModalSettings({
 }: Props) {
   const { todos, setTodos } = useTodoContext();
   const [todo, setTodo] = useState<Todo>({ title: "", description: "" });
-
+  console.log(todos, "todos");
   useEffect(() => {
     const selectedTodo = todos.find((todo) => todo._id === taskId);
 
@@ -43,19 +43,6 @@ function TaskModalSettings({
     setTodo({ ...todo, description: event.target.value });
   };
 
-  // const handleSubmit = (event: any) => {
-  //   event.preventDefault();
-  //   const updateTask = async () => {
-  //     try {
-  //       await updateTodo(taskId, todo);
-  //       return console.log("updateTodo", todo);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   updateTask();
-  //   setModalClose();
-  // };
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -94,7 +81,7 @@ function TaskModalSettings({
           initial="containerInitial"
           animate="containerAnimate"
           exit="containerExit"
-          className="w-full h-full bg-nightBlue bg-opacity-40 absolute top-0 left-0 flex justify-center items-center font-inter"
+          className="w-full h-full z-30 bg-nightBlue bg-opacity-40 absolute top-0 left-0 flex justify-center items-center font-inter"
         >
           {/* modal inner */}
           <motion.form
@@ -103,7 +90,7 @@ function TaskModalSettings({
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-[30%] h-auto min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px] lg:max-h-[500px] bg-white rounded-2xl p-6 flex  flex-col  relative"
+            className="w-[30%] h-auto min-w-[90%] md:min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px] lg:max-h-[500px] bg-white rounded-2xl p-6 flex  flex-col  relative"
           >
             {/* cross */}
             <div

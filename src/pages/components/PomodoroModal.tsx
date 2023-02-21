@@ -10,24 +10,28 @@ type Props = {
   setIsOnWorkPhase: (newTime: boolean) => void;
   setTimerActive: (newTime: boolean) => void;
   workTime: number;
-  breakTime: number;
-  isOnWorkPhase: boolean;
+  setDefaultTime: (newTime: number) => void;
+  setNewWorkTime: (newWorkTime: number) => void;
+  setNewBreakTime: (newBreakTime: number) => void;
+  newWorkTime: number;
+  newBreakTime: number;
 };
 function PomodoroModal({
   handleClick,
   isModalOpen,
   setModalClose,
   workTime,
-  breakTime,
   setWorkTime,
   setBreakTime,
   setTime,
-  isOnWorkPhase,
   setIsOnWorkPhase,
   setTimerActive,
+  setDefaultTime,
+  setNewWorkTime,
+  setNewBreakTime,
+  newWorkTime,
+  newBreakTime,
 }: Props) {
-  const [newWorkTime, setNewWorkTime] = useState<number>(workTime);
-
   const handleWorkTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setNewWorkTime(parseInt(event.target.value));
   };
@@ -35,33 +39,28 @@ function PomodoroModal({
   const handleBreakTimeChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setBreakTime(parseInt(event.target.value));
+    setNewBreakTime(parseInt(event.target.value));
   };
-
-  // notice a new working time
-  // useEffect(() => {
-  //   setIsOnWorkPhase(true);
-  // }, [workTime]);
 
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    let newWorkTimeSeconds = newWorkTime * 60;
+    let newBreakTimeSeconds = newBreakTime * 60;
+    setWorkTime(newWorkTimeSeconds);
+    setBreakTime(newBreakTimeSeconds);
 
-    // setWorkTime(newWorkTime);
-
-    if (isOnWorkPhase && newWorkTime != workTime) {
-      setTime(newWorkTime);
+    setDefaultTime(newWorkTimeSeconds);
+    console.log(newWorkTime, workTime);
+    if (newWorkTimeSeconds != workTime) {
+      console.log("work time and change smthing");
+      setDefaultTime(newWorkTimeSeconds);
       setIsOnWorkPhase(true);
-
-      console.log("work phase + nouveau temps entré");
-    } else if (!isOnWorkPhase && newWorkTime != workTime) {
-      setTime(newWorkTime);
+      setTime(newWorkTimeSeconds);
+    } else if (newWorkTimeSeconds === workTime) {
+      console.log("break time and change only break time");
+      setDefaultTime(newBreakTimeSeconds);
       setIsOnWorkPhase(false);
-      console.log("break phase + nouveau temps entré");
-    } else {
-      setIsOnWorkPhase(false);
-
-      setTime(breakTime);
-      console.log("work phase ou break phase + nouveau temps entré");
+      setTime(newBreakTimeSeconds);
     }
     setTimerActive(false);
     setModalClose();
@@ -75,7 +74,7 @@ function PomodoroModal({
           initial="containerInitial"
           animate="containerAnimate"
           exit="containerExit"
-          className="w-full h-full bg-nightBlue bg-opacity-40 absolute top-0 left-0 flex justify-center items-center font-inter"
+          className="w-full h-full z-10 bg-nightBlue bg-opacity-40 absolute top-0 left-0 flex justify-center items-center font-inter"
         >
           {/* modal inner */}
           <motion.form
@@ -84,7 +83,7 @@ function PomodoroModal({
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-[30%] h-auto min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px] lg:max-h-[500px] bg-white rounded-2xl p-6 flex  flex-col  relative"
+            className="w-[30%] h-auto min-w-[90%] md:min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px]  bg-white rounded-2xl p-6 flex  flex-col  relative"
           >
             {/* cross */}
             <div
@@ -140,7 +139,7 @@ function PomodoroModal({
                 className="border rounded-md p-2 border-lightGreen border-opacity-40 focus:outline-2 focus:outline-lightGreen text-base "
                 type="number"
                 placeholder="Set the duration of your break"
-                value={breakTime}
+                value={newBreakTime}
                 onChange={handleBreakTimeChange}
               />
             </div>

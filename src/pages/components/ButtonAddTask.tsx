@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import TaskModalAdd from "./TaskModalAdd";
+import { motion } from "framer-motion";
 type Props = {
   handleClick?: React.MouseEventHandler;
 };
 function ButtonAddTask({ handleClick }: Props) {
   return (
     <>
-      <div
+      <motion.div
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.96 }}
         onClick={handleClick}
-        className="w-full h-[6%] bg-nightBlue rounded-full flex items-center justify-center text-white space-x-5 hover:bg-lightGreen transition-colors duration-300 cursor-pointer "
+        className="w-full h-[6%] min-h-[50px] bg-nightBlue rounded-full flex items-center justify-center text-white space-x-5 hover:bg-lightGreen transition-colors duration-300 cursor-pointer "
       >
         <p className="font-inter text-base font-normal">Add a task</p>
         <svg
@@ -32,7 +34,7 @@ function ButtonAddTask({ handleClick }: Props) {
             strokeLinecap="round"
           />
         </svg>
-      </div>
+      </motion.div>
     </>
   );
 }

@@ -38,12 +38,13 @@ interface TodoProviderProps {
 const TodoProvider = ({ children }: TodoProviderProps) => {
   const [todos, setTodos] = useState<Todo[]>([{ title: "Add a task" }]);
   const [todoId, setTodoId] = useState("");
+  const [isTaskComplet, setIsTaskCompleted] = useState<boolean>(false);
   useEffect(() => {
     const fetchTodos = async () => {
       try {
         const response = await getTodos();
 
-        setTodos(response);
+        setTodos(response.reverse());
       } catch (error) {
         console.error(error);
       }
