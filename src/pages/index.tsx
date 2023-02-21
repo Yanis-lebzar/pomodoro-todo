@@ -1,10 +1,6 @@
 "use client";
 
 import Head from "next/head";
-// const inter = Inter({ subsets: ["latin"] });
-
-// import { Inter } from "@next/font/google";
-// import styles from "@/styles/Home.module.css";
 import TextMain from "./components/TextMain";
 import { useState } from "react";
 import ButtonAddTask from "./components/ButtonAddTask";
@@ -16,16 +12,13 @@ import Pomodoro from "./components/Pomodoro";
 import { motion } from "framer-motion";
 
 export default function Home() {
-  const [iconIndex, setIconIndex] = useState(0);
-  // const [todos, setTodos] = useState<Todo[]>([]);
-
-  const { todos, setTodos, todoId } = useTodoContext();
-  const logTodo = (todo: any) => {
-    console.log("aaaaaaaaaaaaaaaaa", todo);
-  };
-
+  const { todos, todoId } = useTodoContext();
   const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+
+  // const logTodo = (todo: any) => {
+  //   console.log("aaaaaaaaaaaaaaaaa", todo);
+  // };
 
   console.log("todo context", todoId);
   return (

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
+
 type Props = {
   handleClick?: React.MouseEventHandler;
 };
+
 function ButtonAddTask({ handleClick }: Props) {
   return (
     <>

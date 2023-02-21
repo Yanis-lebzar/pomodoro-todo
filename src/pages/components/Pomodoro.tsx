@@ -11,26 +11,7 @@ import {
   BreakTime,
   WorkTime,
   Parameter,
-  IconInterface,
 } from "@/datas/icons";
-
-const ContainerVariants = {
-  out: {
-    y: 600,
-    opacity: 0,
-  },
-  in: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.9,
-      // The first child will appear AFTER the parrent has appeared on the screen
-      delayChildren: 2.4,
-      // The next sibling will appear 0.5s after the previous one
-      staggerChildren: 0.3,
-    },
-  },
-};
 
 function Pomodoro() {
   const [playToggleIndex, setPlayToggleIndex] = useState(0); // enable to change icon play/pause onClick
@@ -224,3 +205,21 @@ function Pomodoro() {
 }
 
 export default Pomodoro;
+
+const ContainerVariants = {
+  out: {
+    y: 600,
+    opacity: 0,
+  },
+  in: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.9,
+      // The first child will appear AFTER the parrent has appeared on the screen
+      delayChildren: 2.4,
+      // The next sibling will appear 0.5s after the previous one
+      staggerChildren: 0.3,
+    },
+  },
+};

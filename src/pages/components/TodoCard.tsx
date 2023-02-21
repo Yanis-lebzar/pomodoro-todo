@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import TaskModal from "./TaskModalSettings";
-import TaskModalSettings from "./TaskModalSettings";
 import { useTodoContext } from "@/context/TodoProvider";
 import { updateTodo } from "../api/todo-api";
 import {
@@ -9,30 +7,6 @@ import {
   useMotionValue,
   useTransform,
 } from "framer-motion";
-
-const item = {
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  hidden: {
-    opacity: 0,
-    x: -10,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: -100,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
 
 type Props = {
   handleClick: () => void;
@@ -49,18 +23,11 @@ interface Todo {
 }
 
 function TodoCard({ handleClick, taskTitle, taskId, taskCompletion }: Props) {
-  const { setTodoId, todos, setTodos } = useTodoContext();
+  const { setTodoId } = useTodoContext();
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
-
   const pathLength = useMotionValue(0);
   const opacity = useTransform(pathLength, [0, 0.5], [0, 1]);
-  const checkmarkIconVariants = {
-    clicked: { pathLength: 1 },
-    unclicked: { pathLength: 0 },
-  };
-  // useEffect(()=> {
-  //   setTodoId(todoId)
-  // },[])
+
   useEffect(() => {
     setIsCompleted(taskCompletion);
   }, []);
@@ -152,14 +119,32 @@ function TodoCard({ handleClick, taskTitle, taskId, taskCompletion }: Props) {
           </AnimatePresence>
         </svg>
       </motion.div>
-      {/* <TaskModalSettings
-        setModalClose={() => setIsModalOpen(false)}
-        handleClick={() => setIsModalOpen(false)}
-        isModalOpen={isModalOpen}
-        taskId={taskId}
-      /> */}
     </AnimatePresence>
   );
 }
 
 export default TodoCard;
+
+const item = {
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    x: -10,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -100,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};

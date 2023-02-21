@@ -1,25 +1,8 @@
-import Image from "next/image";
 import React from "react";
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion } from "framer-motion";
 
 import { IconInterface } from "@/datas/icons";
 
-const childrenVariants = {
-  out: {
-    opacity: 0,
-    y: 50,
-  },
-  in: {
-    opacity: 1,
-    y: 0,
-  },
-};
-// animate svgs with framer motion
 export interface Icon {
   viewBox: string;
   path: JSX.Element;
@@ -30,11 +13,7 @@ type Props = {
   handleClick?: React.MouseEventHandler;
 };
 
-function ButtonPomodoro({
-  icon,
-
-  handleClick,
-}: Props) {
+function ButtonPomodoro({ icon, handleClick }: Props) {
   return (
     <motion.div
       variants={childrenVariants}
@@ -57,3 +36,14 @@ function ButtonPomodoro({
 }
 
 export default ButtonPomodoro;
+
+const childrenVariants = {
+  out: {
+    opacity: 0,
+    y: 50,
+  },
+  in: {
+    opacity: 1,
+    y: 0,
+  },
+};

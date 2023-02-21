@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React from "react";
+
 type Props = {
   handleClick?: React.MouseEventHandler;
   isModalOpen: boolean;
@@ -16,6 +17,7 @@ type Props = {
   newWorkTime: number;
   newBreakTime: number;
 };
+
 function PomodoroModal({
   handleClick,
   isModalOpen,
@@ -50,14 +52,14 @@ function PomodoroModal({
     setBreakTime(newBreakTimeSeconds);
 
     setDefaultTime(newWorkTimeSeconds);
-    console.log(newWorkTime, workTime);
+    // console.log(newWorkTime, workTime);
     if (newWorkTimeSeconds != workTime) {
-      console.log("work time and change smthing");
+      // console.log("work time and change smthing");
       setDefaultTime(newWorkTimeSeconds);
       setIsOnWorkPhase(true);
       setTime(newWorkTimeSeconds);
     } else if (newWorkTimeSeconds === workTime) {
-      console.log("break time and change only break time");
+      // console.log("break time and change only break time");
       setDefaultTime(newBreakTimeSeconds);
       setIsOnWorkPhase(false);
       setTime(newBreakTimeSeconds);

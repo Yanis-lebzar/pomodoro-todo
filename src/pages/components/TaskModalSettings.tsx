@@ -24,7 +24,7 @@ function TaskModalSettings({
 }: Props) {
   const { todos, setTodos } = useTodoContext();
   const [todo, setTodo] = useState<Todo>({ title: "", description: "" });
-  console.log(todos, "todos");
+
   useEffect(() => {
     const selectedTodo = todos.find((todo) => todo._id === taskId);
 
@@ -41,6 +41,20 @@ function TaskModalSettings({
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setTodo({ ...todo, description: event.target.value });
+  };
+
+  const handleDelete = async (event: any) => {
+    event.preventDefault();
+    try {
+      await deleteTodo(taskId);
+      const updatedTodos = todos.filter((existingTodo: Todo) => {
+        return existingTodo._id !== taskId;
+      });
+      setTodos(updatedTodos);
+      setModalClose();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -60,19 +74,6 @@ function TaskModalSettings({
     }
   };
 
-  const handleDelete = async (event: any) => {
-    event.preventDefault();
-    try {
-      await deleteTodo(taskId);
-      const updatedTodos = todos.filter((existingTodo: Todo) => {
-        return existingTodo._id !== taskId;
-      });
-      setTodos(updatedTodos);
-      setModalClose();
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <AnimatePresence>
       {isModalOpen ? (

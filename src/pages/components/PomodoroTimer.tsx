@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LottieAnimation from "./LottieAnimation";
 import BreakAnimation from "../../datas/breakLottie.json";
 

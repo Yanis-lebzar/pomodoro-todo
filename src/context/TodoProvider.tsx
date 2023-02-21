@@ -8,7 +8,7 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-import { getTodos, createTodo } from "../pages/api/todo-api";
+import { getTodos } from "../pages/api/todo-api";
 
 interface Todo {
   title: string;
@@ -38,7 +38,7 @@ interface TodoProviderProps {
 const TodoProvider = ({ children }: TodoProviderProps) => {
   const [todos, setTodos] = useState<Todo[]>([{ title: "Add a task" }]);
   const [todoId, setTodoId] = useState("");
-  const [isTaskComplet, setIsTaskCompleted] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchTodos = async () => {
       try {
