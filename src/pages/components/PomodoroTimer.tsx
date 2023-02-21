@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import LottieAnimation from "./LottieAnimation";
 import BreakAnimation from "../../datas/breakLottie.json";
 
@@ -18,7 +18,7 @@ function Pomodorotimer({ time, isOnWorkPhase }: Props) {
   };
   getTime();
   return (
-    <div className="w-full h-28 bg-pomodoroBg backdrop-blur-pomodoroBlur rounded-lg flex items-center justify-center relative ">
+    <div className="w-full h-28 bg-nightBlue bg-opacity-40 md:bg-pomodoroBg backdrop-blur-3xl md:backdrop-blur-pomodoroBlur rounded-lg flex items-center justify-center relative ">
       <p className="text-5xl  font-medium text-white font-inter">{getTime()}</p>
       {!isOnWorkPhase && <LottieAnimation animation={BreakAnimation} />}
     </div>

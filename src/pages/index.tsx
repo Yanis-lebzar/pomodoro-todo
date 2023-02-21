@@ -1,43 +1,24 @@
 "use client";
 
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "@next/font/google";
-import styles from "@/styles/Home.module.css";
 import TextMain from "./components/TextMain";
-import ButtonPomodoro from "./components/ButtonPomodoro";
-import iconsDatas from "../datas/icons";
-import { svgStaticDatas, svgDynamicDatas } from "../datas/svg";
-import { useEffect, useState } from "react";
-import PomodoroTimer from "./components/PomodoroTimer";
+import { useState } from "react";
 import ButtonAddTask from "./components/ButtonAddTask";
-import TodoContainer from "./components/TodoCard";
-import TaskModal from "./components/TaskModalSettings";
-import Task from "./components/Task";
-import AddTask from "./components/AddTask";
-import { getTodos, createTodo } from "./api/todo-api";
 import TodoCard from "./components/TodoCard";
-import TodoProvider, { useTodoContext } from "@/context/TodoProvider";
+import { useTodoContext } from "@/context/TodoProvider";
 import TaskModalSettings from "./components/TaskModalSettings";
 import TaskModalAdd from "./components/TaskModalAdd";
 import Pomodoro from "./components/Pomodoro";
-const inter = Inter({ subsets: ["latin"] });
-// interface Todo {
-//   title: string;
-//   description?: string;
-//   taskId: string;
-// }
+import { motion } from "framer-motion";
+
 export default function Home() {
-  const [iconIndex, setIconIndex] = useState(0);
-  // const [todos, setTodos] = useState<Todo[]>([]);
-
-  const { todos, setTodos, todoId } = useTodoContext();
-  const logTodo = (todo: any) => {
-    console.log("aaaaaaaaaaaaaaaaa", todo);
-  };
-
+  const { todos, todoId } = useTodoContext();
   const [isModalSettingsOpen, setIsModalSettingsOpen] = useState(false);
   const [isModalAddOpen, setIsModalAddOpen] = useState(false);
+
+  // const logTodo = (todo: any) => {
+  //   console.log("aaaaaaaaaaaaaaaaa", todo);
+  // };
 
   console.log("todo context", todoId);
   return (
@@ -48,28 +29,34 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className=" w-full h-screen bg-hero-background bg-cover bg-no-repeat bg-bottom ">
+      <main className=" w-full h-screen bg-hero-background bg-cover bg-no-repeat bg-bottom overflow-auto scroll-smooth scrollbar-hide  ">
         {/* Content */}
-        <div className="w-full h-full flex  pt-40 pb-10 px-16">
+        <div className="w-full h-full md:flex pt-10  md:pt-40 pb-10 2xl:px-16 xl:px-10  md:px-8 px-8">
           {/* Left column / Pomodoro part */}
-          <div className=" lg:h-full lg:w-1/2  pt-7 flex flex-col  justify-between">
+          <div className=" 2xl:h-full 2xl:w-1/2 md:flex-1 pt-7 flex flex-col  md:justify-between justify-around items-center md:items-start space-y-14 md:space-y-0">
             <TextMain />
             <Pomodoro />
           </div>
           {/* Right column / Todo part */}
-          <div className=" lg:h-full lg:w-1/2 bg-red-200 p-10 rounded-todoContainer bg-todoContainer">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.4, duration: 0.7 }}
+            className=" 2xl:h-full  2xl:w-1/2 xl:w-3/5 lg:w-3/6 md:w-4/12 md:mt-0 mt-10 bg-red-200 p-10 rounded-todoContainer bg-todoContainer overflow-hidden"
+          >
             <ButtonAddTask handleClick={() => setIsModalAddOpen(true)} />
             {/* <AddTask /> */}
-            <div className="mt-20 grid grid-cols-3 w-full place-items-center gap-[10%] overflow-auto scroll-smooth scrollbar-hide ">
+            <motion.div className="xl:mt-20 mt-10  xl:grid  xl:grid-cols-3  gap-x-[7%] w-full h-full pb-20  xl:gap-x-[10%]  overflow-auto scroll-smooth scrollbar-hide  ">
               {todos.map((todo) => {
-                // logTodo(todo);
+                // logTodo(todo.completed);
                 return (
                   <>
                     <TodoCard
                       key={todo._id}
                       taskTitle={todo.title}
                       handleClick={() => setIsModalSettingsOpen(true)}
-                      todoId={todo._id ? todo._id : ""}
+                      taskId={todo._id ? todo._id : ""}
+                      taskCompletion={todo.completed ?? false}
                     />
                   </>
                 );
@@ -85,8 +72,8 @@ export default function Home() {
                 handleClick={() => setIsModalAddOpen(!isModalAddOpen)}
                 isModalOpen={isModalAddOpen}
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </main>
     </>

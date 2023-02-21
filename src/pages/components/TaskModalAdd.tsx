@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createTodo } from "../api/todo-api";
 import { useTodoContext } from "@/context/TodoProvider";
 
@@ -16,7 +16,6 @@ interface Todo {
 
 function TaskModalAdd({ handleClick, isModalOpen, setModalClose }: Props) {
   const { setTodos, todos } = useTodoContext();
-
   const [todo, setTodo] = useState<Todo>({ title: "", description: "" });
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +61,7 @@ function TaskModalAdd({ handleClick, isModalOpen, setModalClose }: Props) {
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-[30%] h-auto min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px] lg:max-h-[500px] bg-white rounded-2xl p-6 flex  flex-col  relative"
+            className="w-[30%] h-auto min-w-[90%] md:min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px] lg:max-h-[500px] bg-white rounded-2xl p-6 flex  flex-col  relative"
           >
             {/* cross */}
             <div
@@ -120,8 +119,6 @@ function TaskModalAdd({ handleClick, isModalOpen, setModalClose }: Props) {
                 placeholder="Write a description if you want to"
                 value={todo.description}
                 onChange={handleDescriptionChange}
-                // value={updatedTodoDescription}
-                // onChange={handleUpdateTodoDescription}
               />
             </div>
             <div className="modal-actions ">

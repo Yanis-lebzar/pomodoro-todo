@@ -43,19 +43,20 @@ function TaskModalSettings({
     setTodo({ ...todo, description: event.target.value });
   };
 
-  // const handleSubmit = (event: any) => {
-  //   event.preventDefault();
-  //   const updateTask = async () => {
-  //     try {
-  //       await updateTodo(taskId, todo);
-  //       return console.log("updateTodo", todo);
-  //     } catch (error) {
-  //       console.error(error);
-  //     }
-  //   };
-  //   updateTask();
-  //   setModalClose();
-  // };
+  const handleDelete = async (event: any) => {
+    event.preventDefault();
+    try {
+      await deleteTodo(taskId);
+      const updatedTodos = todos.filter((existingTodo: Todo) => {
+        return existingTodo._id !== taskId;
+      });
+      setTodos(updatedTodos);
+      setModalClose();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
@@ -73,19 +74,6 @@ function TaskModalSettings({
     }
   };
 
-  const handleDelete = async (event: any) => {
-    event.preventDefault();
-    try {
-      await deleteTodo(taskId);
-      const updatedTodos = todos.filter((existingTodo: Todo) => {
-        return existingTodo._id !== taskId;
-      });
-      setTodos(updatedTodos);
-      setModalClose();
-    } catch (error) {
-      console.error(error);
-    }
-  };
   return (
     <AnimatePresence>
       {isModalOpen ? (
@@ -94,7 +82,7 @@ function TaskModalSettings({
           initial="containerInitial"
           animate="containerAnimate"
           exit="containerExit"
-          className="w-full h-full bg-nightBlue bg-opacity-40 absolute top-0 left-0 flex justify-center items-center font-inter"
+          className="w-full h-full z-30 bg-nightBlue bg-opacity-40 absolute top-0 left-0 flex justify-center items-center font-inter"
         >
           {/* modal inner */}
           <motion.form
@@ -103,7 +91,7 @@ function TaskModalSettings({
             initial="initial"
             animate="animate"
             exit="exit"
-            className="w-[30%] h-auto min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px] lg:max-h-[500px] bg-white rounded-2xl p-6 flex  flex-col  relative"
+            className="w-[30%] h-auto min-w-[90%] md:min-w-[400px] max-w-4xl min-h-[400px] max-h-[500px] lg:max-h-[500px] bg-white rounded-2xl p-6 flex  flex-col  relative"
           >
             {/* cross */}
             <div

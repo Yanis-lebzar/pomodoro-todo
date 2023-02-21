@@ -1,15 +1,14 @@
 import React from "react";
-import { JsonObjectExpression } from "typescript";
 import Lottie from "lottie-react";
 
 type Props = {
   animation: Record<string, any>;
 };
 const style = {
-  position: "absolute",
+  position: "absolute" as const,
   width: "26%",
   height: "full",
-  bottom: -30,
+  bottom: "-30px",
 };
 function LottieAnimation({ animation }: Props) {
   return <Lottie animationData={animation} style={style} />;
