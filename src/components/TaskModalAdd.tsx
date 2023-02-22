@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
-import { createTodo } from "../api/todo-api";
+import { createTodo } from "../pages/api/todo-api";
 import { useTodoContext } from "@/context/TodoProvider";
 
 type Props = {

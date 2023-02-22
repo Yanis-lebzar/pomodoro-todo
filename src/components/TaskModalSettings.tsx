@@ -1,7 +1,7 @@
 import { useTodoContext } from "@/context/TodoProvider";
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
-import { deleteTodo, updateTodo } from "../api/todo-api";
+import { deleteTodo, updateTodo } from "../pages/api/todo-api";
 
 type Props = {
   handleClick?: React.MouseEventHandler;

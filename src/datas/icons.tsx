@@ -1,9 +1,9 @@
 import React from "react";
 
 export interface IconInterface {
+  name: string;
   viewBox: string;
   path: JSX.Element;
-  name: string;
 }
 
 export const Play: IconInterface = {

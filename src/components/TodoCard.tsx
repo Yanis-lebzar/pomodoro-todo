@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTodoContext } from "@/context/TodoProvider";
-import { updateTodo } from "../api/todo-api";
+import { updateTodo } from "../pages/api/todo-api";
 import {
   AnimatePresence,
   motion,

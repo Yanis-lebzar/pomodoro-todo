@@ -1,6 +1,6 @@
 import React from "react";
 import LottieAnimation from "./LottieAnimation";
-import BreakAnimation from "../../datas/breakLottie.json";
+import BreakAnimation from "../datas/breakLottie.json";
 
 type Props = {
   time: number;

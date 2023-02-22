@@ -1,14 +1,14 @@
 "use client";
 
 import Head from "next/head";
-import TextMain from "./components/TextMain";
+import TextMain from "../components/TextMain";
 import { useState } from "react";
-import ButtonAddTask from "./components/ButtonAddTask";
-import TodoCard from "./components/TodoCard";
+import ButtonAddTask from "../components/ButtonAddTask";
+import TodoCard from "../components/TodoCard";
 import { useTodoContext } from "@/context/TodoProvider";
-import TaskModalSettings from "./components/TaskModalSettings";
-import TaskModalAdd from "./components/TaskModalAdd";
-import Pomodoro from "./components/Pomodoro";
+import TaskModalSettings from "../components/TaskModalSettings";
+import TaskModalAdd from "../components/TaskModalAdd";
+import Pomodoro from "../components/Pomodoro";
 import { motion } from "framer-motion";
 
 export default function Home() {
