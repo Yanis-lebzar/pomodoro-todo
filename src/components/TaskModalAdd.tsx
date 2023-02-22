@@ -36,7 +36,7 @@ function TaskModalAdd({ handleClick, isModalOpen, setModalClose }: Props) {
         const response = await createTodo(todo);
         console.log("res =>", response);
         setTodo(response);
-        setTodos([...todos, todo]);
+        setTodos([todo, ...todos]);
       } catch (error) {
         console.error(error);
       }
